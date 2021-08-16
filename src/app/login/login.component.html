@@ -1,0 +1,26 @@
+
+<div class="w-screen h-screen flex flex-col justify-center items-center lg:grid lg:grid-cols-2">
+    <img src="assets/images/undraw_unlock_24mb.svg" class="hidden lg:block w-1/2 hover:scale-150  transition duration-500 transform mx-auto ">
+  
+    <form   class="flex flex-col justify-center items-center w-1/2">
+        <img src="assets/images/undraw_male_avatar_323b.svg" class="w-32">
+        <h2 class="my-8 font-display font-bold text-3xl text-gray-700">bienvenue a vous</h2>
+        <div class="relative">
+            <i class="fa fa-user absolute text-blue-800 text-xl"></i>
+            <input type="text" name="username"  [(ngModel)]="user.username"  class="pl-8 border-b-2 font-display  text-lg focus:outline-none  focus:border-blue-800 transition duration-500"   placeholder="Username">
+            <span class="text-red-600 text-xs italic">{{message}}</span>
+        </div>
+  
+        <div class="relative mt-8">
+            <i class="fa fa-lock absolute text-blue-800 text-xl"></i>
+            <input type="password"  [(ngModel)]="user.password" name="password" class="pl-8 border-b-2 font-display  text-lg focus:outline-none focus:border-blue-800 transition duration-500" id="password" placeholder="password">
+            <span class="text-red-600 text-xs italic">{{message}}</span>
+        </div>
+        <a href="#" class="self-end text-gray-600 mt-4 text-bold">mot de passe oublier</a>
+       <button type="submit" id="btn-login"  (click)="checkLogin()" class="py-3 px-20 bg-blue-800 text-white rounded-full font-bold text-lg mt-4 transform hover:translate-y-1 transition duration-500">Log In</button> 
+    </form>
+  </div>
+
+  <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin-clockwise" [fullScreen] = "true">
+      <p style="color: white" > Loading... </p>
+    </ngx-spinner>

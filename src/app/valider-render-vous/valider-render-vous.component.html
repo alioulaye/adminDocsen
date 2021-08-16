@@ -1,0 +1,76 @@
+
+<app-header></app-header>
+
+
+<div  class="overflow-y-auto mt-8  fixed inset-0 z-50 outline-none focus:outline-none  items-center flex flex-wrap justify-center">
+    <div class="relative w-auto my-6 mx-auto max-w-6xl">
+      <!--content-->
+      <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+        
+        <!--body-->
+        <div class="relative p-6 flex-auto">
+          <!-- component -->
+  <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
+    <div class="-mx-3 md:flex mb-6"> 
+      <div class="flex flex-wrap justify-center">
+        <div class="w-6/12 sm:w-4/12 pr-12">
+          <img  src="{{format+rdv.data.photoUser}}" alt="Selected Image" height="400" width="400">
+        </div>
+       
+      </div>
+    </div>
+
+    <div class="md:flex mb-6"> 
+      <div class="flex flex-col w-full">
+       
+        <div class="w-full mb-4">
+          <h2 class="ml-12 text-black text-xs "> Nom patient  :  <i class="text-sm font-bold">{{rdv.data.nompatient}}</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Prenom patient :  <i class=" text-sm font-bold">{{rdv.data.prenompatient}}</i></h2>
+  
+        </div>
+     
+        <div class="w-full mb-4">
+          <h2 class="ml-12 text-black text-xs "> Adresse patient  :  <i class="text-sm font-bold">{{rdv.data.adressePatient}}</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Numero patient :  <i class=" text-sm font-bold">{{rdv.data.telPatient}}</i></h2>
+  
+        </div>
+        <div class="w-full mb-4">
+          <p class="ml-12 text-black text-sm text-center font-bold "> Rendez-vous avec </p>
+  
+        </div>
+        <div class="w-full mb-4">
+          <h2 class="ml-12 text-black text-xs ">  Dr :<i class="text-sm font-bold">{{rdv.data.nommedecin}}</i> &nbsp;&nbsp;<i class=" text-sm font-bold">{{rdv.data.prenommedecin}}</i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Tel medecin :  <i class=" text-sm font-bold">{{rdv.data.telMedecin}}</i></h2>
+  
+        </div>
+
+        <div class="w-full mb-4">
+          <h2 class="ml-12 text-black text-xs "> date du : <i class="text-sm font-bold">{{rdv.data.dateRdv | date}}</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; à : <i class="text-sm font-bold">{{rdv.data.hopital}}</i></h2>
+  
+        </div>
+
+        <div class="w-full mb-4">
+          <h2 class="ml-12 text-black text-xs ">de : <i class="text-sm font-bold">{{rdv.data.adresse}}</i></h2>
+  
+        </div>
+
+        <div class="w-full mb-4 mx-12" *ngIf="!valide; else valid" >
+          <button (click)="valider(rdv.data)"  class=" py-3 px-20 bg-blue-800 text-white hover:text-indigo-300 outline-none focus:outline-none " type="button" style="transition: all .15s ease" >
+            valider Rendez-vous
+          </button>
+  
+        </div>
+        <ng-template #valid>
+          <button disabled  class=" py-3 px-20 bg-gray-500 text-white  outline-none focus:outline-none " type="button" style="transition: all .15s ease" >
+            Rendez-vous valider 
+          </button>
+        </ng-template>
+    </div>
+    
+    </div>
+
+   
+    
+  </div>
+   </div>
+    </div>  
+</div>
+</div>
+

@@ -1,0 +1,158 @@
+<app-header></app-header>
+
+<div class="flex flex-col">
+
+  <div class="input-group mb-3">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Search libelle"
+      [(ngModel)]="libelle"
+    />
+    <div class="input-group-append">
+      <button
+        class="btn btn-outline-secondary"
+        type="button"
+       
+      >
+        Search
+      </button>
+    </div>
+
+    <div class="mx-12">
+        <!-- This example requires Tailwind CSS v2.0+ -->
+    <div class="flex flex-row">
+        <div class="pl-52 md:flex mb-6  sm:-mx-6 lg:mx-8 w-full">
+          <div class="md:w-1/2 py-2 align-middle inline-block -mx-3 md:flex mb-6 sm:px-6 lg:px-8">
+            <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+              <table class="  px-3 divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Nom 
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Adresse
+                    </th>
+
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Telephone
+                    </th>
+
+                  </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                  <tr *ngFor="let servi of hopitals | paginate : {
+                    itemsPerPage: pageSize,
+                    currentPage: page,
+                    totalItems: count
+                  };
+            let i = index
+          "
+          [class.active]="i == currentIndex"
+          >
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <div class="flex items-center">
+                      
+                        <div class="ml-4">
+                          <div class="text-sm font-medium text-gray-900">
+                            {{servi.nom}}
+                          </div>
+                          
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <div class="text-sm text-gray-900">{{servi.adresse}}</div>
+                    
+                    </td>
+
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <div class="text-sm text-gray-900">{{servi.tel}}</div>
+                    
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <button (click)="editer(servi.id)" class=" text-indigo-400 hover:text-indigo-700   outline-none focus:outline-none mr-1 mb-1" type="button" style="transition: all .15s ease" >
+                        <i class="fas fa-edit"></i>
+                      </button>
+                     
+                      <button  class=" text-red-500 hover:text-red-700   outline-none focus:outline-none mr-1 mb-1" type="button" style="transition: all .15s ease" >
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
+                    </td>
+                  </tr>
+      
+                  <!-- More items... -->
+                </tbody>
+                
+              
+            
+              </table>
+            
+            </div>
+            
+          </div>
+          <div class="md:w-1/2 pl-16 flex-col ">
+            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-city">
+            Nom
+            </label>
+            <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-city" type="text"
+            placeholder="nom hopital" [(ngModel)]="hopital.nom">
+
+            <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-city">
+              Adresse
+              </label>
+              <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-city" type="text"
+              placeholder="Adresse hopital" [(ngModel)]="hopital.adresse">
+
+              <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-city">
+                Telephone
+                </label>
+                <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-city" type="text"
+                placeholder="Telephone hopital" [(ngModel)]="hopital.tel">
+            <div *ngIf="!update; else updat">
+              <button type="submit" id="btn-login" (click)="addHopital()"  class="py-3 px-12 bg-blue-800 text-white rounded-full font-bold text-lg mt-4 ">
+                Enregistrer
+              </button>
+            </div> 
+
+          </div>
+        </div>
+      </div>
+  
+    </div>
+
+    <ng-template #updat>
+      <button (click)="addHopital()"   class="py-3 px-12 bg-blue-800 text-white rounded-full font-bold text-lg mt-4" type="button" style="transition: all .15s ease" >
+        Editer 
+      </button>
+
+      <button  (click)="clear()" class="py-3 px-12 bg-blue-500 text-white rounded-full font-bold text-lg mt-4" type="button" style="transition: all .15s ease" >
+        Annuler 
+      </button>
+    </ng-template>
+   <div class="pl-52 flex flex-row">
+          <pagination-controls
+        previousLabel="Prev"
+        nextLabel="Next"
+        responsive="true"
+        (pageChange)="handlePageChange($event)">
+        </pagination-controls>
+        
+      <div class="pl-6 mt-1 flex flex-row">
+        <h3 >par Page:</h3>
+        <select class="mb-8 ml-2"  (change)="handlePageSizeChange($event)">
+          <option *ngFor="let size of pageSizes" [ngValue]="size">
+            {{ size }}
+          </option>
+        </select>
+      </div>
+    </div>
+</div>
+
+
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">  
+    <p style="color: white">Please Wait. </p>  
+    </ngx-spinner> 
+
+
